@@ -1,0 +1,70 @@
+import random
+import statistics
+import string
+
+def dict():
+
+    lst = []
+    for i in range(random.randint(2,10)):
+        dic1 = {}
+        for j in range(3):
+            x = random.choice(string.ascii_letters)
+            dic1[x] = random.randint(0,100)
+        lst.append(dic1)
+
+
+    dic2 = {}
+    dic3 = {}
+    i = 0
+    for dic in lst:
+        i = i+1
+        for key in dic:
+            if key not in dic2:
+                dic2[key] = dic[key]
+                dic3[key] = i
+            else:
+                if dic2[key] < dic[key]:
+                    new_key = key + "_" + str(i)
+                    dic2[new_key] = dic[key]
+                    dic2.pop(key)
+                    dic3[key] = i
+                else:
+                    new_key = key + "_" + str(dic3[key])
+                    dic2[new_key] = dic2[key]
+                    dic2.pop(key)
+
+    return dic2
+dict()
+
+st = """homEwork:
+  tHis iz your homeWork, copy these Text to variable.
+
+
+
+  You NEED TO normalize it fROM letter CASEs point oF View. also, create one MORE senTENCE witH LAST WoRDS of each existING SENtence and add it to the END OF this Paragraph.
+
+
+
+  it iZ misspeLLing here. fix“iZ” with correct “is”, but ONLY when it Iz a mistAKE.
+
+
+
+  last iz TO calculate nuMber OF Whitespace characteRS in this Tex. caREFULL, not only Spaces, but ALL whitespaces. I got 87."""
+
+def string_count(x):
+    lines = x.split("\n")
+    result = []
+    for line in lines:
+        line = line.strip().capitalize()
+    
+        parts = line.split(". ")
+        parts = [p.capitalize() for p in parts]
+        result.append(". ".join(parts))
+    
+    x = "\n".join(result)
+    
+    x = x.replace("iz", "is")
+    ws = x.count(" ")
+    return ws
+
+string_count(st)
