@@ -1,0 +1,36 @@
+import random
+import statistics
+import string
+
+
+lst = []
+for i in range(random.randint(2,10)):
+    dic1 = {}
+    for j in range(3):
+        x = random.choice(string.ascii_letters)
+        dic1[x] = random.randint(0,100)
+    lst.append(dic1)
+
+
+dic2 = {}
+dic3 = {}
+i = 0
+for dic in lst:
+    i = i+1
+    for key in dic:
+        if key not in dic2:
+            dic2[key] = dic[key]
+            dic3[key] = i
+        else:
+            if dic2[key] < dic[key]:
+                new_key = key + "_" + str(i)
+                dic2[new_key] = dic[key]
+                dic2.pop(key)
+                dic3[key] = i
+            else:
+                new_key = key + "_" + str(dic3[key])
+                dic2[new_key] = dic2[key]
+                dic2.pop(key)
+
+
+print(dic2)
